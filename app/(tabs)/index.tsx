@@ -1,6 +1,7 @@
 import TitleList from "@/components/Moleculas/titleList";
 import { ApplianceRepair } from "@/components/list/ApplianceRepair";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
   Image,
@@ -14,9 +15,9 @@ import {
 } from "react-native";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   const [text, onChangeText] = useState("");
 
-  // Filtrar a lista de ApplianceRepair com base no texto de entrada
   const filteredItems = ApplianceRepair.filter((item) =>
     item.name.toLowerCase().includes(text.toLowerCase())
   );
@@ -32,20 +33,26 @@ export default function HomeScreen() {
         />
         <View style={styles.containerComponent}>
           <TitleList />
-          {filteredItems.map((item, index) => (
-            <View key={index} style={styles.itensList}>
-              <Image source={item.image} style={styles.imageList} />
-              <View>
-                <View style={styles.ratingContainer}>
-                  <AntDesign name="star" size={24} color="#FFC554" />
-                  <Text style={styles.boldText}>{item.rating}</Text>
-                  <Text>({item.peopleRated})</Text>
+          <View style={styles.containerList}>
+            {filteredItems.map((item, index) => (
+              <View key={index} style={styles.itensList}>
+                <Image source={item.image} style={styles.imageList} />
+                <View style={styles.itemtListContainer}>
+                  <View style={styles.containerItemsClassification}>
+                    <View style={styles.ratingContainer}>
+                      <AntDesign name="star" size={24} color="#FFC554" />
+                      <Text style={styles.boldText}>{item.rating}</Text>
+                      <Text>({item.peopleRated})</Text>
+                    </View>
+                    <SimpleLineIcons name="options" size={24} color="#6F767E" />
+                  </View>
+                  <Text style={styles.boldText}>{item.name}</Text>
+                  <Text style={styles.startsFromText}> Starts From </Text>
+                  <Text style={styles.price}>${item.price}</Text>
                 </View>
-                <Text style={styles.boldText}>{item.name}</Text>
-                <Text style={styles.price}>${item.price}</Text>
               </View>
-            </View>
-          ))}
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -99,7 +106,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
+  containerItemsClassification: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: 180,
+  },
   boldText: {
     fontWeight: "bold",
+  },
+  itemtListContainer: {
+    gap: 3,
+  },
+  startsFromText: {
+    color: "#9A9FA5",
+  },
+  containerList: {
+    marginTop: 10,
   },
 });
