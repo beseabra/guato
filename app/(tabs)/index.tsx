@@ -13,9 +13,10 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { StackTypes } from "../_layout";
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackTypes>();
   const [text, onChangeText] = useState("");
 
   const filteredItems = ApplianceRepair.filter((item) =>
@@ -44,7 +45,16 @@ export default function HomeScreen() {
                       <Text style={styles.boldText}>{item.rating}</Text>
                       <Text>({item.peopleRated})</Text>
                     </View>
-                    <SimpleLineIcons name="options" size={24} color="#6F767E" />
+                    <SimpleLineIcons
+                      name="options"
+                      size={24}
+                      color="#6F767E"
+                      onPress={() => {
+                        navigation.navigate("Details", {
+                          itemId: item.id,
+                        });
+                      }}
+                    />
                   </View>
                   <Text style={styles.boldText}>{item.name}</Text>
                   <Text style={styles.startsFromText}> Starts From </Text>
