@@ -1,6 +1,7 @@
 import ImageContainer from "@/components/Moleculas/ImageContainer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import Description from "./Description";
 import NumberRooms from "./NumberOfRooms";
 import PropertyTypeSelector from "./PropertyTypeSelector";
 
@@ -37,11 +38,12 @@ const DetailsContainer: React.FC<DetailsContainerProps> = ({
           onIconPress={onIconPress}
         />
         <NumberRooms
-          Setunit={setUnit}
-          Setbedrooms={setBedrooms}
+          setUnits={setUnit}
+          setBedrooms={setBedrooms}
           countUnits={unit}
           countBedrooms={bedroom}
         />
+        <Description />
       </View>
     </View>
   );
@@ -51,10 +53,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F9F9F9",
+    paddingBottom: 20,
   },
   typeProperty: {
-    position: "absolute",
-    top: 210,
+    marginTop: -35,
   },
 });
 
