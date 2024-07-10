@@ -1,4 +1,5 @@
 import { ApplianceRepair } from "@/assets/list/ApplianceRepair";
+import NextStep from "@/components/Moleculas/NextStep";
 import DetailsContainer from "@/components/Organismo/DetailsContainer";
 import { useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
@@ -24,20 +25,23 @@ const Details: React.FC = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      {filteredItems.map((item) => (
-        <DetailsContainer
-          key={item.id}
-          item={item}
-          selectedIcon={selectedIcon}
-          onIconPress={handleIconPress}
-          setUnit={setCountUnits}
-          setBedrooms={setCountBedrooms}
-          unit={countUnits}
-          bedroom={countBedrooms}
-        />
-      ))}
-    </ScrollView>
+    <>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        {filteredItems.map((item) => (
+          <DetailsContainer
+            key={item.id}
+            item={item}
+            selectedIcon={selectedIcon}
+            onIconPress={handleIconPress}
+            setUnit={setCountUnits}
+            setBedrooms={setCountBedrooms}
+            unit={countUnits}
+            bedroom={countBedrooms}
+          />
+        ))}
+      </ScrollView>
+      <NextStep />
+    </>
   );
 };
 

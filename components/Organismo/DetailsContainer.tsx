@@ -1,7 +1,7 @@
-import ImageContainer from "@/components/Moleculas/ImageContainer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import Description from "./Description";
+import ImageContainer from "./ImageContainer";
 import NumberRooms from "./NumberOfRooms";
 import PropertyTypeSelector from "./PropertyTypeSelector";
 
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F9F9F9",
-    paddingBottom: 20,
+    paddingBottom: 120,
   },
   typeProperty: {
     marginTop: -35,

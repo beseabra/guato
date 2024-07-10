@@ -1,7 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import RatingContainer from "./RatingContainer";
+import RatingContainer from "../Moleculas/RatingContainer";
 
 interface ImageContainerProps {
   item: {

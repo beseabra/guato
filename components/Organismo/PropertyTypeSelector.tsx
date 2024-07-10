@@ -54,12 +54,9 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
 
 const styles = StyleSheet.create({
   containerTypes: {
-    backgroundColor: "#fff",
-    width: 342,
+    backgroundColor: "#FFF",
     borderRadius: 10,
     margin: 10,
-    marginBottom: 0,
-    height: 174,
     padding: 15,
   },
   typePropertyIcons: {
