@@ -10,7 +10,7 @@ export default function Title({ title }: TitleProps) {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     borderLeftWidth: 5,
     borderLeftColor: "#CABDFF",
