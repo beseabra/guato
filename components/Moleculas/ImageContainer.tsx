@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import RatingContainer from "./RatingContainer";
 
 interface ImageContainerProps {
@@ -15,7 +15,7 @@ interface ImageContainerProps {
 const ImageContainer: React.FC<ImageContainerProps> = ({ item }) => {
   return (
     <View style={styles.imageContainer}>
-      <Image source={item.image} style={styles.imageList} />
+      <ImageBackground source={item.image} style={styles.imageList} />
       <LinearGradient
         colors={["transparent", "rgba(0,0,0,0.8)"]}
         style={styles.gradient}
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   imageList: {
     width: "100%",
     height: 255,
+    transform: [{ scaleX: -1 }],
   },
   gradient: {
     position: "absolute",
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
   imageTextContainer: {
     position: "absolute",
-    top: 130,
+    top: 125,
     left: 10,
     padding: 5,
   },

@@ -18,7 +18,7 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
   onIconPress,
 }) => {
   return (
-    <View style={styles.typeProperty}>
+    <View style={styles.containerTypes}>
       <Title title="Type of Property" />
       <View style={styles.typePropertyIcons}>
         <IconOption
@@ -53,18 +53,16 @@ const PropertyTypeSelector: React.FC<PropertyTypeSelectorProps> = ({
 };
 
 const styles = StyleSheet.create({
-  typeProperty: {
-    position: "absolute",
-    top: 200,
-    width: 320,
-    backgroundColor: "#FFF",
+  containerTypes: {
+    backgroundColor: "#fff",
+    width: 342,
     borderRadius: 10,
-    padding: 15,
-    margin: 20,
+    margin: 10,
+    marginBottom: 0,
     height: 174,
+    padding: 15,
   },
   typePropertyIcons: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 30,

@@ -12,6 +12,12 @@ const Details: React.FC = () => {
   const filteredItems = ApplianceRepair.filter((item) => item.id === itemId);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 
+  const [countUnits, setCountUnits] = useState(0);
+  const [countBedrooms, setCountBedrooms] = useState(0);
+
+  console.log("countUnits", countUnits);
+  console.log("countBedrooms", countBedrooms);
+
   const handleIconPress = (iconName: string) => {
     setSelectedIcon(iconName);
   };
@@ -22,6 +28,10 @@ const Details: React.FC = () => {
       item={item}
       selectedIcon={selectedIcon}
       onIconPress={handleIconPress}
+      setUnit={setCountUnits}
+      setBedrooms={setCountBedrooms}
+      unit={countUnits}
+      bedroom={countBedrooms}
     />
   ));
 };

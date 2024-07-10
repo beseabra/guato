@@ -1,6 +1,7 @@
 import ImageContainer from "@/components/Moleculas/ImageContainer";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import NumberRooms from "./NumberOfRooms";
 import PropertyTypeSelector from "./PropertyTypeSelector";
 
 interface DetailsContainerProps {
@@ -12,20 +13,36 @@ interface DetailsContainerProps {
   };
   selectedIcon: string | null;
   onIconPress: (iconName: string) => void;
+  setUnit: React.Dispatch<React.SetStateAction<number>>;
+  setBedrooms: React.Dispatch<React.SetStateAction<number>>;
+  unit: number;
+  bedroom: number;
 }
 
 const DetailsContainer: React.FC<DetailsContainerProps> = ({
   item,
   selectedIcon,
   onIconPress,
+  setUnit,
+  setBedrooms,
+  unit,
+  bedroom,
 }) => {
   return (
     <View style={styles.container}>
       <ImageContainer item={item} />
-      <PropertyTypeSelector
-        selectedIcon={selectedIcon}
-        onIconPress={onIconPress}
-      />
+      <View style={styles.typeProperty}>
+        <PropertyTypeSelector
+          selectedIcon={selectedIcon}
+          onIconPress={onIconPress}
+        />
+        <NumberRooms
+          Setunit={setUnit}
+          Setbedrooms={setBedrooms}
+          countUnits={unit}
+          countBedrooms={bedroom}
+        />
+      </View>
     </View>
   );
 };
@@ -34,6 +51,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F9F9F9",
+  },
+  typeProperty: {
+    position: "absolute",
+    top: 210,
   },
 });
 
