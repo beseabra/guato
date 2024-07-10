@@ -1,7 +1,7 @@
+import { ApplianceRepair } from "@/assets/list/ApplianceRepair";
 import ItemList from "@/components/Moleculas/ItemList";
 import SearchBar from "@/components/Moleculas/SearchBar";
 import TitleList from "@/components/Moleculas/titleList";
-import { ApplianceRepair } from "@/components/list/ApplianceRepair";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
