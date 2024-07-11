@@ -31,7 +31,9 @@ const BillDetails: React.FC<BillDetailsProps> = ({
   return (
     <View>
       <View style={styles.containerButtons}>
-        <Text>Total: USD {total}</Text>
+        <Text>
+          Total: <Text style={styles.cash}>USD {total}</Text>
+        </Text>
         <TouchableOpacity style={styles.button} onPress={toggleHeight}>
           <Text style={styles.buttonText}>
             {title} {containerHeight === 116 ? "^" : "v"}
@@ -40,8 +42,12 @@ const BillDetails: React.FC<BillDetailsProps> = ({
       </View>
       {containerHeight === 232 && (
         <View style={styles.containerInfos}>
-          <Text>Room: {room}</Text>
-          <Text>Service: {service}</Text>
+          <Text>
+            <Text style={styles.cash}>Bedrooms:</Text> {service}
+          </Text>
+          <Text>
+            <Text style={styles.cash}>Room: </Text> {room}
+          </Text>
         </View>
       )}
     </View>
@@ -70,6 +76,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderRadius: 10,
     marginTop: 10,
+    padding: 10,
+  },
+  cash: {
+    fontWeight: "bold",
   },
 });
 

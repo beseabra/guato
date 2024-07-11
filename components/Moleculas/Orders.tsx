@@ -110,7 +110,7 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  const phoneNumber = "4399899855";
+                  const phoneNumber = "43999898143";
                   const phoneUrl = `tel:${phoneNumber}`;
                   Linking.openURL(phoneUrl);
                 }}

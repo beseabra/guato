@@ -16,6 +16,7 @@ import { StackTypes } from "../_layout";
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<StackTypes>();
   const [text, onChangeText] = useState("");
+  const [isGridView, setIsGridView] = useState(false);
 
   const filteredItems = ApplianceRepair.filter((item) =>
     item.name.toLowerCase().includes(text.toLowerCase())
@@ -26,9 +27,13 @@ const HomeScreen: React.FC = () => {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <SearchBar text={text} onChangeText={onChangeText} />
         <View style={styles.containerComponent}>
-          <TitleList />
+          <TitleList
+            onListView={() => setIsGridView(false)}
+            onGridView={() => setIsGridView(true)}
+          />
           <ItemList
             items={filteredItems}
+            isGridView={isGridView}
             onPressItem={(id) => {
               navigation.navigate("Details", {
                 itemId: id,
