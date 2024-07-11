@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Button from "../Atomos/Button";
+import BillDetails from "../Moleculas/BillDetails";
 import CustomModal from "../Organismo/CustomModal";
 
 const NextStep: React.FC = () => {
-  const [containerHeight, setContainerHeight] = useState(116);
   const [modalVisible, setModalVisible] = useState(false);
+  const [timeSelected, setTimeSelected] = useState<string | null>(null);
+  const [dateSelected, setDateSelected] = useState<string | null>(null);
 
-  const toggleHeight = () => {
-    setContainerHeight((prevHeight) => (prevHeight === 116 ? 232 : 116));
-  };
+  console.log("TESTE", timeSelected, dateSelected);
 
   const openModal = () => {
     setModalVisible(true);
@@ -20,21 +20,13 @@ const NextStep: React.FC = () => {
   };
 
   return (
-    <View style={[styles.container, { height: containerHeight }]}>
-      <View style={styles.containerButtons}>
-        <Text>Total: USD 150.50</Text>
-        <TouchableOpacity style={styles.button} onPress={toggleHeight}>
-          <Text style={styles.buttonText}>
-            Bill Details {containerHeight === 116 ? "^" : "v"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {containerHeight === 232 && (
-        <View style={styles.containerInfos}>
-          <Text>Room: USD 100.00</Text>
-          <Text>Service: USD 50.50</Text>
-        </View>
-      )}
+    <View style={styles.container}>
+      <BillDetails
+        total="USD 150.50"
+        room="USD 100.00"
+        service="USD 50.50"
+        title="Bill Details"
+      />
       <View style={styles.containerButtons}>
         <Button
           name="Save Draft"
@@ -49,7 +41,14 @@ const NextStep: React.FC = () => {
           border={0}
         />
       </View>
-      <CustomModal visible={modalVisible} onClose={closeModal} />
+      <CustomModal
+        visible={modalVisible}
+        onClose={closeModal}
+        setDate={setDateSelected}
+        setTime={setTimeSelected}
+        date={dateSelected}
+        time={timeSelected}
+      />
     </View>
   );
 };
@@ -68,26 +67,12 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     gap: 20,
   },
-  button: {
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 20,
-  },
-  buttonText: {
-    color: "#FC944D",
-    fontSize: 18,
-  },
   containerButtons: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "90%",
-  },
-  containerInfos: {
-    height: 95,
-    backgroundColor: "#F5F5F5",
-    borderRadius: 10,
+    marginBottom: 20,
   },
 });
 

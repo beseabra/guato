@@ -1,14 +1,56 @@
 import { Feather } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import CustomCalendar from "../Atomos/Calendar";
 
-const Data: React.FC = () => {
+interface DataProps {
+  setDateTime: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+const Data: React.FC<DataProps> = ({ setDateTime }) => {
+  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  const handleDatePress = (date: string) => {
+    setSelectedDate(date);
+    setIsCalendarVisible(false);
+    setDateTime(date);
+  };
+
   return (
-    <View style={styles.container}>
-      <Feather name="calendar" size={24} color="black" />
-      <View>
-        <Text style={styles.title}>DATE</Text>
-        <Text style={styles.subtitle}>Select your Date</Text>
-      </View>
+    <View>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => setIsCalendarVisible(true)}
+      >
+        <Feather name="calendar" size={24} color="black" />
+        <View>
+          <Text style={styles.title}>DATE</Text>
+          <Text style={styles.subtitle}>
+            {selectedDate ? selectedDate : "Select your Date"}
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isCalendarVisible}
+        onRequestClose={() => setIsCalendarVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <CustomCalendar
+              onDayPress={(day) => {
+                const formattedDate = new Date(
+                  day.dateString
+                ).toLocaleDateString("en-US");
+                handleDatePress(formattedDate);
+              }}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -29,6 +71,18 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 15,
     fontWeight: "bold",
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: "90%",
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 20,
   },
 });
 

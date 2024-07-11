@@ -1,6 +1,6 @@
 import { ApplianceRepair } from "@/assets/list/ApplianceRepair";
-import NextStep from "@/components/Moleculas/NextStep";
 import DetailsContainer from "@/components/Organismo/DetailsContainer";
+import NextStep from "@/components/Organismo/NextStep";
 import { useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
