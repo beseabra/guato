@@ -4,12 +4,24 @@ import Button from "../Atomos/Button";
 import BillDetails from "../Moleculas/BillDetails";
 import CustomModal from "../Organismo/CustomModal";
 
-const NextStep: React.FC = () => {
+interface NextStepProps {
+  NumberUnits: number;
+  NumberBedrooms: number;
+  price: number;
+}
+
+const NextStep: React.FC<NextStepProps> = ({
+  NumberUnits,
+  NumberBedrooms,
+  price,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [timeSelected, setTimeSelected] = useState<string | null>(null);
   const [dateSelected, setDateSelected] = useState<string | null>(null);
 
   console.log("TESTE", timeSelected, dateSelected);
+
+  const total = NumberUnits * price + NumberBedrooms * price;
 
   const openModal = () => {
     setModalVisible(true);
@@ -22,9 +34,9 @@ const NextStep: React.FC = () => {
   return (
     <View style={styles.container}>
       <BillDetails
-        total="USD 150.50"
-        room="USD 100.00"
-        service="USD 50.50"
+        total={total}
+        room={`USD ${NumberUnits * price}`}
+        service={`USD ${NumberBedrooms * price}`}
         title="Bill Details"
       />
       <View style={styles.containerButtons}>
@@ -48,6 +60,9 @@ const NextStep: React.FC = () => {
         setTime={setTimeSelected}
         date={dateSelected}
         time={timeSelected}
+        total={total}
+        room={`USD ${NumberUnits * price}`}
+        service={`USD ${NumberBedrooms * price}`}
       />
     </View>
   );

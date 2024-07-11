@@ -14,6 +14,9 @@ interface CustomModalProps {
   setDate: React.Dispatch<React.SetStateAction<string | null>>;
   time: string | null;
   date: string | null;
+  total: number;
+  room: string;
+  service: string;
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({
@@ -23,6 +26,9 @@ const CustomModal: React.FC<CustomModalProps> = ({
   setDate,
   setTime,
   time,
+  room,
+  service,
+  total,
 }) => {
   const [billSelected, setBillSelected] = useState(false);
 
@@ -55,9 +61,9 @@ const CustomModal: React.FC<CustomModalProps> = ({
           </View>
           <View style={styles.containerDetails}>
             <BillDetails
-              total="USD 150.50"
-              room="USD 100.00"
-              service="USD 50.50"
+              total={total}
+              room={room}
+              service={service}
               setSelect={setBillSelected}
               title="View Details "
             />

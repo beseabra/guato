@@ -12,8 +12,9 @@ type DetailsProps = {
 const Details: React.FC = () => {
   const { itemId } = useRoute().params as DetailsProps;
   const filteredItems = ApplianceRepair.filter((item) => item.id === itemId);
-  const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
+  const itemPrice = filteredItems.length > 0 ? filteredItems[0].price : null;
 
+  const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [countUnits, setCountUnits] = useState(0);
   const [countBedrooms, setCountBedrooms] = useState(0);
 
@@ -40,7 +41,13 @@ const Details: React.FC = () => {
           />
         ))}
       </ScrollView>
-      <NextStep />
+      {itemPrice !== null && (
+        <NextStep
+          NumberBedrooms={countBedrooms}
+          NumberUnits={countUnits}
+          price={itemPrice}
+        />
+      )}
     </>
   );
 };

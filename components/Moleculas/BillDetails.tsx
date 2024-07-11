@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface BillDetailsProps {
-  total: string;
+  total: number;
   room: string;
   service: string;
   setSelect?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +31,7 @@ const BillDetails: React.FC<BillDetailsProps> = ({
   return (
     <View>
       <View style={styles.containerButtons}>
-        <Text>Total: {total}</Text>
+        <Text>Total: USD {total}</Text>
         <TouchableOpacity style={styles.button} onPress={toggleHeight}>
           <Text style={styles.buttonText}>
             {title} {containerHeight === 116 ? "^" : "v"}

@@ -14,7 +14,7 @@ const Hour: React.FC<HourProps> = ({ setDateTime }) => {
   const handleConfirm = (time: string) => {
     setSelectedTime(time);
     setDateTime(time);
-    setIsPickerVisible(false); // Fechar o picker após confirmar a seleção
+    setIsPickerVisible(false);
   };
 
   return (
