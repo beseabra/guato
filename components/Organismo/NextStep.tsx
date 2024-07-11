@@ -1,5 +1,7 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import UUID from "react-native-uuid";
 import Button from "../Atomos/Button";
 import BillDetails from "../Moleculas/BillDetails";
 import CustomModal from "../Organismo/CustomModal";
@@ -31,6 +33,42 @@ const NextStep: React.FC<NextStepProps> = ({
     setModalVisible(false);
   };
 
+  const saveDraft = async () => {
+    try {
+      const id = UUID.v4();
+      const business = "Westinghouse";
+      const currentDate = new Date();
+      const selectedDate = dateSelected ? new Date(dateSelected) : null;
+      let status = "pendente";
+
+      if (selectedDate) {
+        if (selectedDate.toDateString() === currentDate.toDateString()) {
+          status = "confirmado";
+        } else if (selectedDate < currentDate) {
+          status = "cancelado";
+        }
+      }
+
+      const draft = {
+        id,
+        title,
+        timeSelected,
+        dateSelected,
+        business,
+        status,
+      };
+
+      const existingDrafts = await AsyncStorage.getItem("drafts");
+      const drafts = existingDrafts ? JSON.parse(existingDrafts) : [];
+      drafts.push(draft);
+
+      await AsyncStorage.setItem("drafts", JSON.stringify(drafts));
+      Alert.alert("Draft saved successfully!");
+    } catch (error) {
+      Alert.alert("Failed to save draft.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <BillDetails
@@ -40,12 +78,7 @@ const NextStep: React.FC<NextStepProps> = ({
         title="Bill Details"
       />
       <View style={styles.containerButtons}>
-        <Button
-          name="Save Draft"
-          onPress={() => console.log("Next")}
-          color="#fff"
-          border={1}
-        />
+        <Button name="Save Draft" onPress={saveDraft} color="#fff" border={1} />
         <Button
           name="Book Now"
           onPress={openModal}
