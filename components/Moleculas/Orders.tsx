@@ -8,6 +8,26 @@ interface OrderProps {
 }
 
 const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
+  const getStatusStyles = (status: string) => {
+    switch (status) {
+      case "pendente":
+        return {
+          color: "#EB833C",
+          backgroundColor: "#EB833C1A",
+        };
+      case "confirmado":
+        return {
+          color: "#7FC09C",
+          backgroundColor: "#ECF8F1",
+        };
+      default:
+        return {
+          color: "#535763",
+          backgroundColor: "#E5E5E5",
+        };
+    }
+  };
+
   return (
     <>
       {filteredDrafts.map((draft) => (
@@ -25,11 +45,15 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
               <Text>Reference Code: #D-{draft.id.slice(0, 5)}</Text>
             </View>
           </View>
-
+          <View style={styles.statusContainer}>
+            <Text style={styles.statusText}>Status</Text>
+            <Text style={[styles.status, getStatusStyles(draft.status)]}>
+              {draft.status}
+            </Text>
+          </View>
           <Text>Time: {draft.timeSelected}</Text>
           <Text>Date: {draft.dateSelected}</Text>
           <Text>Business: {draft.business}</Text>
-          <Text>Status: {draft.status}</Text>
         </View>
       ))}
     </>
@@ -65,6 +89,19 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E5E5E5",
     borderBottomWidth: 1,
     paddingBottom: 10,
+  },
+  statusContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  statusText: {
+    color: "#535763",
+  },
+  status: {
+    padding: 5,
+    borderRadius: 5,
   },
 });
 
