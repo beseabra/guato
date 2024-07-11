@@ -62,7 +62,7 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
         return (
           <View key={draft.id} style={styles.draftContainer}>
             <View style={styles.nameReference}>
-              <View style={styles.iconContainer}>
+              <View style={[styles.iconContainer, styles.iconColor]}>
                 <MaterialCommunityIcons
                   name="hair-dryer"
                   size={24}
@@ -80,9 +80,8 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
                 {draft.status}
               </Text>
             </View>
-
-            <View style={styles.scheduleContainer}>
-              <View style={styles.containerIcon}>
+            <View style={styles.rowContainer}>
+              <View style={styles.iconContainer}>
                 <Feather name="calendar" size={24} color="black" />
               </View>
               <View style={styles.timeSpace}>
@@ -92,20 +91,20 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
                 <Text style={styles.statusText}>Schedule</Text>
               </View>
             </View>
-
-            <View style={styles.BContainer}>
-              <View style={styles.containerIcon}>
-                <MaterialCommunityIcons
-                  name="crosshairs-gps"
-                  size={24}
-                  color="#00B1F7"
-                />
+            <View style={[styles.rowContainer, styles.BContainer]}>
+              <View style={styles.rowContainer}>
+                <View style={styles.iconContainer}>
+                  <MaterialCommunityIcons
+                    name="crosshairs-gps"
+                    size={24}
+                    color="#00B1F7"
+                  />
+                </View>
+                <View style={styles.timeSpace}>
+                  <Text style={styles.containerTime}>{draft.business}</Text>
+                  <Text style={styles.statusText}>Service provider</Text>
+                </View>
               </View>
-              <View style={styles.timeSpace}>
-                <Text style={styles.containerTime}>{draft.business}</Text>
-                <Text style={styles.statusText}>Service provider</Text>
-              </View>
-
               <Button
                 title="Call"
                 onPress={() => {
@@ -138,12 +137,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   iconContainer: {
-    backgroundColor: "#FFBC99",
     width: 50,
     height: 50,
-    borderRadius: 100,
+    borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#E5E5E5",
   },
   nameReference: {
     flexDirection: "row",
@@ -165,25 +166,13 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
   },
-  containerIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#E5E5E5",
-  },
-  scheduleContainer: {
+  rowContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
   },
   BContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
+    justifyContent: "space-between",
     marginTop: 10,
   },
   containerTime: {
@@ -193,6 +182,9 @@ const styles = StyleSheet.create({
   timeSpace: {
     justifyContent: "flex-start",
     height: 50,
+  },
+  iconColor: {
+    backgroundColor: "#FFBC99",
   },
 });
 
