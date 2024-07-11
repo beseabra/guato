@@ -1,8 +1,14 @@
 import { Draft } from "@/app/(tabs)/explore";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { addHours, format, parse } from "date-fns";
 import React from "react";
-import { Button, Linking, StyleSheet, Text, View } from "react-native";
+import {
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface OrderProps {
   filteredDrafts: Draft[];
@@ -101,14 +107,17 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
                   <Text style={styles.statusText}>Service provider</Text>
                 </View>
               </View>
-              <Button
-                title="Call"
+              <TouchableOpacity
+                style={styles.button}
                 onPress={() => {
                   const phoneNumber = "4399899855";
                   const phoneUrl = `tel:${phoneNumber}`;
                   Linking.openURL(phoneUrl);
                 }}
-              />
+              >
+                <Ionicons name="call" size={20} color="#fff" />
+                <Text style={{ color: "#fff" }}> Call </Text>
+              </TouchableOpacity>
             </View>
           </View>
         );
@@ -181,6 +190,15 @@ const styles = StyleSheet.create({
   },
   iconColor: {
     backgroundColor: "#FFBC99",
+  },
+  button: {
+    backgroundColor: "#6759FF",
+    flexDirection: "row",
+    padding: 10,
+    borderRadius: 8,
+    alignItems: "center",
+    minWidth: 80,
+    gap: 5,
   },
 });
 
