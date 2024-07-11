@@ -1,4 +1,6 @@
+import { StackTypesTabs } from "@/app/(tabs)/_layout";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "expo-router";
 import React, { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import UUID from "react-native-uuid";
@@ -11,6 +13,7 @@ interface NextStepProps {
   NumberBedrooms: number;
   price: number;
   title: string;
+  iconSelected: string | null;
 }
 
 const NextStep: React.FC<NextStepProps> = ({
@@ -18,13 +21,15 @@ const NextStep: React.FC<NextStepProps> = ({
   NumberBedrooms,
   price,
   title,
+  iconSelected,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [timeSelected, setTimeSelected] = useState<string | null>(null);
   const [dateSelected, setDateSelected] = useState<string | null>(null);
 
-  const total = NumberUnits * price + NumberBedrooms * price;
+  const navigation = useNavigation<StackTypesTabs>();
 
+  const total = NumberUnits * price + NumberBedrooms * price;
   const openModal = () => {
     setModalVisible(true);
   };
@@ -34,11 +39,26 @@ const NextStep: React.FC<NextStepProps> = ({
   };
 
   const saveDraft = async () => {
+    if (!iconSelected) {
+      Alert.alert("Select a property type.");
+      return;
+    }
+    if (!timeSelected || !dateSelected) {
+      Alert.alert("Select a date and time.");
+      return;
+    }
+
     try {
       const id = UUID.v4();
       const business = "Westinghouse";
       const currentDate = new Date();
-      const selectedDate = dateSelected ? new Date(dateSelected) : null;
+      let selectedDate = null;
+
+      if (dateSelected) {
+        const [month, day, year] = dateSelected.split("/");
+        selectedDate = new Date(Number(year), Number(month) - 1, Number(day));
+      }
+
       let status = "pendente";
 
       if (selectedDate) {
@@ -64,6 +84,7 @@ const NextStep: React.FC<NextStepProps> = ({
 
       await AsyncStorage.setItem("drafts", JSON.stringify(drafts));
       Alert.alert("Draft saved successfully!");
+      navigation.navigate("index");
     } catch (error) {
       Alert.alert("Failed to save draft.");
     }

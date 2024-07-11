@@ -45,6 +45,7 @@ const Details: React.FC = () => {
           NumberUnits={countUnits}
           price={itemPrice}
           title={itemName}
+          iconSelected={selectedIcon}
         />
       )}
     </>

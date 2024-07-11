@@ -1,5 +1,5 @@
 import { Feather } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TimePicker from "../Atomos/Time";
 
@@ -16,6 +16,12 @@ const Hour: React.FC<HourProps> = ({ setDateTime }) => {
     setDateTime(time);
     setIsPickerVisible(false);
   };
+
+  useEffect(() => {
+    if (!isPickerVisible) {
+      setSelectedTime(null);
+    }
+  }, [isPickerVisible]);
 
   return (
     <View>
