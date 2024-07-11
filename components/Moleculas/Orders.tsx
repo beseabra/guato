@@ -51,7 +51,9 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
               {draft.status}
             </Text>
           </View>
-          <Text>Time: {draft.timeSelected}</Text>
+          <Text>
+            Time: {draft.timeSelected} - {parseInt(draft.timeSelected) + 1}:00
+          </Text>
           <Text>Date: {draft.dateSelected}</Text>
           <Text>Business: {draft.business}</Text>
         </View>
