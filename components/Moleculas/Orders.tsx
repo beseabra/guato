@@ -32,10 +32,6 @@ const Order: React.FC<OrderProps> = ({ filteredDrafts }) => {
   return (
     <>
       {filteredDrafts.map((draft) => {
-        console.log(`Draft ID: ${draft.id}`);
-        console.log(`Date Selected: ${draft.dateSelected}`);
-        console.log(`Time Selected: ${draft.timeSelected}`);
-
         const timeSelected = draft.timeSelected;
         let formattedNewTime = "";
         if (timeSelected) {
