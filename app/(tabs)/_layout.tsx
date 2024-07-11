@@ -18,7 +18,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}
@@ -30,10 +30,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "archive" : "archive-outline"}
+              name={focused ? "document" : "document-outline"}
               color={color}
             />
           ),
@@ -42,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="notifications"
         options={{
-          title: "Notifications",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "notifications" : "notifications-outline"}
@@ -54,10 +54,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="messages"
         options={{
-          title: "Messages",
+          title: "",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "bar-chart" : "bar-chart-outline"}
+              name={focused ? "chatbox" : "chatbox-outline"}
               color={color}
             />
           ),
