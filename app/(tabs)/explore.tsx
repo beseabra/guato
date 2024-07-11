@@ -2,7 +2,8 @@ import Title from "@/components/Atomos/title";
 import NoUpcomingOrder from "@/components/Moleculas/NoUpcomingOrder";
 import Order from "@/components/Moleculas/Orders";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -22,26 +23,27 @@ export interface Draft {
 }
 
 const Explore = () => {
-  const [drafts, setDrafts] = useState<any[]>([]);
+  const [drafts, setDrafts] = useState<Draft[]>([]);
   const [selectedButton, setSelectedButton] = useState<
     "Upcoming" | "History" | "Draft"
   >("Upcoming");
 
-  useEffect(() => {
-    const fetchDrafts = async () => {
-      try {
-        const savedDrafts = await AsyncStorage.getItem("drafts");
-        if (savedDrafts) {
-          setDrafts(JSON.parse(savedDrafts));
-        }
-      } catch (error) {
-        console.error("Failed to load drafts", error);
+  const fetchDrafts = async () => {
+    try {
+      const savedDrafts = await AsyncStorage.getItem("drafts");
+      if (savedDrafts) {
+        setDrafts(JSON.parse(savedDrafts));
       }
-    };
+    } catch (error) {
+      console.error("Failed to load drafts", error);
+    }
+  };
 
-    fetchDrafts();
-  }, []);
-  console.log(drafts);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchDrafts();
+    }, [])
+  );
 
   const parseDate = (dateString: string) => {
     if (!dateString) {
