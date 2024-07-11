@@ -8,18 +8,18 @@ interface NextStepProps {
   NumberUnits: number;
   NumberBedrooms: number;
   price: number;
+  title: string;
 }
 
 const NextStep: React.FC<NextStepProps> = ({
   NumberUnits,
   NumberBedrooms,
   price,
+  title,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [timeSelected, setTimeSelected] = useState<string | null>(null);
   const [dateSelected, setDateSelected] = useState<string | null>(null);
-
-  console.log("TESTE", timeSelected, dateSelected);
 
   const total = NumberUnits * price + NumberBedrooms * price;
 

@@ -12,7 +12,6 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({ onDayPress }) => {
         if (onDayPress) {
           onDayPress(day);
         }
-        console.log("selected day", day);
       }}
     />
   );
