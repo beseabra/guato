@@ -1,5 +1,6 @@
 import Title from "@/components/Atomos/title";
 import NoUpcomingOrder from "@/components/Moleculas/NoUpcomingOrder";
+import Order from "@/components/Moleculas/Orders";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
@@ -10,6 +11,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
+export interface Draft {
+  id: string;
+  title: string;
+  timeSelected: string;
+  dateSelected: string;
+  business: string;
+  status: string;
+}
 
 const Explore = () => {
   const [drafts, setDrafts] = useState<any[]>([]);
@@ -34,6 +44,9 @@ const Explore = () => {
   console.log(drafts);
 
   const parseDate = (dateString: string) => {
+    if (!dateString) {
+      return new Date();
+    }
     const [month, day, year] = dateString.split("/").map(Number);
     return new Date(year, month - 1, day);
   };
@@ -95,16 +108,7 @@ const Explore = () => {
             }
           />
         ) : (
-          filteredDrafts.map((draft) => (
-            <View key={draft.id} style={styles.draftContainer}>
-              <Text style={styles.draftTitle}>{draft.title}</Text>
-              <Text>ID: {draft.id}</Text>
-              <Text>Time: {draft.timeSelected}</Text>
-              <Text>Date: {draft.dateSelected}</Text>
-              <Text>Business: {draft.business}</Text>
-              <Text>Status: {draft.status}</Text>
-            </View>
-          ))
+          <Order filteredDrafts={filteredDrafts} />
         )}
       </ScrollView>
     </SafeAreaView>
